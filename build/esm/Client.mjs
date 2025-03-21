@@ -100,6 +100,13 @@ class Client {
         }
         return await this.createMatchMakeRequest('reconnect', roomId, { reconnectionToken: token }, rootSchema);
     }
+    async getAvailableRooms(roomName = "") {
+        return (await this.http.get(`matchmake/${roomName}`, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })).data;
+    }
     async consumeSeatReservation(response, rootSchema, reuseRoomInstance // used in devMode
     ) {
         const room = this.createRoom(response.room.name, rootSchema);

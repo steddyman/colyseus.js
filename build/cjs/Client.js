@@ -146,6 +146,21 @@ var Client = /** @class */ (function () {
             });
         });
     };
+    Client.prototype.getAvailableRooms = function () {
+        return tslib.__awaiter(this, arguments, void 0, function (roomName) {
+            if (roomName === void 0) { roomName = ""; }
+            return tslib.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.http.get("matchmake/".concat(roomName), {
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        })];
+                    case 1: return [2 /*return*/, (_a.sent()).data];
+                }
+            });
+        });
+    };
     Client.prototype.consumeSeatReservation = function (response, rootSchema, reuseRoomInstance // used in devMode
     ) {
         return tslib.__awaiter(this, void 0, void 0, function () {
