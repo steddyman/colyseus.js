@@ -153,7 +153,8 @@ var Client = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.http.get("matchmake/".concat(roomName), {
                             headers: {
-                                'Accept': 'application/json'
+                                'Accept': 'application/json',
+                                'User-Agent': 'PixelsGuru/1.0'
                             }
                         })];
                     case 1: return [2 /*return*/, (_a.sent()).data];

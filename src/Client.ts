@@ -137,7 +137,8 @@ export class Client {
         return (
             await this.http.get(`matchmake/${roomName}`, {
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'User-Agent': 'PixelsGuru/1.0'
                 }
             })
         ).data;
