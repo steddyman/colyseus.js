@@ -41,7 +41,7 @@ export class HTTP {
             if (!options.headers) {
                 options.headers = {};
             }
-
+            options.headers['User-Agent'] = 'PixelsGuru/1.0';
             options.headers['Authorization'] = `Bearer ${this.authToken}`;
         }
 
@@ -52,6 +52,7 @@ export class HTTP {
             //
         } else {
             // always include credentials
+            options.headers['User-Agent'] = 'PixelsGuru/1.0';
             options.withCredentials = true;
         }
 

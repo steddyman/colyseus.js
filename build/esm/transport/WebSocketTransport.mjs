@@ -1,23 +1,21 @@
-import NodeWebSocket from "ws";
-import { ITransport, ITransportEventMap } from "./ITransport";
+// colyseus.js@0.16.11
+import NodeWebSocket from 'ws';
 
 const WebSocket = globalThis.WebSocket || NodeWebSocket;
-
-export class WebSocketTransport implements ITransport {
-    ws: WebSocket | NodeWebSocket;
-    protocols?: string | string[];
-
-    constructor(public events: ITransportEventMap) {}
-
-    public send(data: Buffer | Uint8Array): void {
+class WebSocketTransport {
+    events;
+    ws;
+    protocols;
+    constructor(events) {
+        this.events = events;
+    }
+    send(data) {
         this.ws.send(data);
     }
-
-    public sendUnreliable(data: ArrayBuffer | Array<number>): void {
+    sendUnreliable(data) {
         console.warn("colyseus.js: The WebSocket transport does not support unreliable messages");
     }
-
-    public connect(url: string) {
+    connect(url) {
         this.ws = new WebSocket(url, this.protocols, {
             headers: { "User-Agent": "PixelsGuru/1.0" }
         });
@@ -27,12 +25,13 @@ export class WebSocketTransport implements ITransport {
         this.ws.onclose = this.events.onclose;
         this.ws.onerror = this.events.onerror;
     }
-
-    public close(code?: number, reason?: string) {
+    close(code, reason) {
         this.ws.close(code, reason);
     }
-
     get isOpen() {
         return this.ws.readyState === WebSocket.OPEN;
     }
 }
+
+export { WebSocketTransport };
+//# sourceMappingURL=WebSocketTransport.mjs.map
